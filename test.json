@@ -1,0 +1,463 @@
+{
+    "jobIds": [
+        "6d6bc4bf-e62d-4e48-9320-37ab2182f245"
+    ],
+    "results": [
+        {
+            "jobId": "6d6bc4bf-e62d-4e48-9320-37ab2182f245",
+            "result": {
+                "data": {
+                    "timestamp": "2026-06-16T20:51:06.983Z",
+                    "rootActivityId": "4661484f-1f4f-47a6-beb4-9a7109c46e8a",
+                    "descriptor": {
+                        "Select": [
+                            {
+                                "Kind": 1,
+                                "Depth": 0,
+                                "Value": "G0",
+                                "GroupKeys": [
+                                    {
+                                        "Source": {
+                                            "Entity": "LT_Instituciones",
+                                            "Property": "cve_institucion"
+                                        },
+                                        "Calc": "G0",
+                                        "IsSameAsSelect": true
+                                    }
+                                ],
+                                "Name": "LT_Instituciones.cve_institucion"
+                            },
+                            {
+                                "Kind": 1,
+                                "Depth": 0,
+                                "Value": "G1",
+                                "GroupKeys": [
+                                    {
+                                        "Source": {
+                                            "Entity": "LT_Instituciones",
+                                            "Property": "Nombre Institución"
+                                        },
+                                        "Calc": "G1",
+                                        "IsSameAsSelect": true
+                                    }
+                                ],
+                                "Name": "LT_Instituciones.Nombre Institución"
+                            },
+                            {
+                                "Kind": 1,
+                                "Depth": 0,
+                                "Value": "G2",
+                                "GroupKeys": [
+                                    {
+                                        "Source": {
+                                            "Entity": "LT_Instituciones",
+                                            "Property": "nombre corto grupo"
+                                        },
+                                        "Calc": "G2",
+                                        "IsSameAsSelect": true
+                                    }
+                                ],
+                                "Name": "LT_Instituciones.nombre corto grupo"
+                            },
+                            {
+                                "Kind": 2,
+                                "Value": "M0",
+                                "Format": "0",
+                                "Name": "FT_situacion_Financiera.PeriodoMasAntiguoReportadoInstitucion"
+                            },
+                            {
+                                "Kind": 2,
+                                "Value": "M1",
+                                "Format": "0",
+                                "Name": "FT_situacion_Financiera.PeriodoMasRecienteReportadoInstitucionesSeleccionadas"
+                            }
+                        ],
+                        "Expressions": {
+                            "Primary": {
+                                "Groupings": [
+                                    {
+                                        "Keys": [
+                                            {
+                                                "Source": {
+                                                    "Entity": "LT_Instituciones",
+                                                    "Property": "cve_institucion"
+                                                },
+                                                "Select": 0
+                                            },
+                                            {
+                                                "Source": {
+                                                    "Entity": "LT_Instituciones",
+                                                    "Property": "Nombre Institución"
+                                                },
+                                                "Select": 1
+                                            },
+                                            {
+                                                "Source": {
+                                                    "Entity": "LT_Instituciones",
+                                                    "Property": "nombre corto grupo"
+                                                },
+                                                "Select": 2
+                                            }
+                                        ],
+                                        "Member": "DM0"
+                                    }
+                                ]
+                            }
+                        },
+                        "Version": 2
+                    },
+                    "metrics": {
+                        "Version": "1.0.0",
+                        "Events": [
+                            {
+                                "Id": "b555e54e-54b8-4a19-b5eb-26c78a1ad060",
+                                "Name": "Execute Semantic Query",
+                                "Component": "DSE",
+                                "Start": "2026-06-16T20:51:06.9838043Z",
+                                "End": "2026-06-16T20:51:07.0151282Z"
+                            },
+                            {
+                                "Id": "e1470e60-e8b3-4c50-b058-c4f4565f0c31",
+                                "ParentId": "b555e54e-54b8-4a19-b5eb-26c78a1ad060",
+                                "Name": "Execute DAX Query",
+                                "Component": "DSE",
+                                "Start": "2026-06-16T20:51:06.9838043Z",
+                                "End": "2026-06-16T20:51:07.0151282Z",
+                                "Metrics": {
+                                    "RowCount": 25
+                                }
+                            },
+                            {
+                                "Id": "2922C96F-FFCA-445A-881D-ECE568618F19",
+                                "ParentId": "e1470e60-e8b3-4c50-b058-c4f4565f0c31",
+                                "Name": "Execute Query",
+                                "Component": "AS",
+                                "Start": "2026-06-16T20:51:07.013Z",
+                                "End": "2026-06-16T20:51:07.023Z"
+                            },
+                            {
+                                "Id": "99C70A3C-CA70-4842-93D4-700EB2B8BCD9",
+                                "ParentId": "2922C96F-FFCA-445A-881D-ECE568618F19",
+                                "Name": "Serialize Rowset",
+                                "Component": "AS",
+                                "Start": "2026-06-16T20:51:07.023Z",
+                                "End": "2026-06-16T20:51:07.023Z"
+                            }
+                        ]
+                    },
+                    "fromCache": false,
+                    "dsr": {
+                        "Version": 2,
+                        "MinorVersion": 1,
+                        "DS": [
+                            {
+                                "N": "DS0",
+                                "PH": [
+                                    {
+                                        "DM0": [
+                                            {
+                                                "S": [
+                                                    {
+                                                        "N": "G0",
+                                                        "T": 1,
+                                                        "DN": "D0"
+                                                    },
+                                                    {
+                                                        "N": "G1",
+                                                        "T": 1,
+                                                        "DN": "D1"
+                                                    },
+                                                    {
+                                                        "N": "G2",
+                                                        "T": 1,
+                                                        "DN": "D2"
+                                                    },
+                                                    {
+                                                        "N": "M0",
+                                                        "T": 4
+                                                    },
+                                                    {
+                                                        "N": "M1",
+                                                        "T": 4
+                                                    }
+                                                ],
+                                                "C": [
+                                                    0,
+                                                    0,
+                                                    0,
+                                                    201203,
+                                                    202405
+                                                ]
+                                            },
+                                            {
+                                                "C": [
+                                                    1,
+                                                    1,
+                                                    202604
+                                                ],
+                                                "R": 12
+                                            },
+                                            {
+                                                "C": [
+                                                    2,
+                                                    2,
+                                                    201911
+                                                ],
+                                                "R": 12
+                                            },
+                                            {
+                                                "C": [
+                                                    3,
+                                                    3,
+                                                    201705
+                                                ],
+                                                "R": 12
+                                            },
+                                            {
+                                                "C": [
+                                                    4,
+                                                    4,
+                                                    202601
+                                                ],
+                                                "R": 12
+                                            },
+                                            {
+                                                "C": [
+                                                    5,
+                                                    5,
+                                                    201909
+                                                ],
+                                                "R": 12
+                                            },
+                                            {
+                                                "C": [
+                                                    6,
+                                                    6,
+                                                    202604
+                                                ],
+                                                "R": 12
+                                            },
+                                            {
+                                                "C": [
+                                                    7,
+                                                    7,
+                                                    201601,
+                                                    202212
+                                                ],
+                                                "R": 4
+                                            },
+                                            {
+                                                "C": [
+                                                    8,
+                                                    8,
+                                                    201604
+                                                ],
+                                                "R": 12
+                                            },
+                                            {
+                                                "C": [
+                                                    9,
+                                                    9,
+                                                    201710
+                                                ],
+                                                "R": 12
+                                            },
+                                            {
+                                                "C": [
+                                                    10,
+                                                    10,
+                                                    201701
+                                                ],
+                                                "R": 12
+                                            },
+                                            {
+                                                "C": [
+                                                    11,
+                                                    11,
+                                                    201203,
+                                                    202604
+                                                ],
+                                                "R": 4
+                                            },
+                                            {
+                                                "C": [
+                                                    12,
+                                                    12,
+                                                    201210,
+                                                    202509
+                                                ],
+                                                "R": 4
+                                            },
+                                            {
+                                                "C": [
+                                                    13,
+                                                    13,
+                                                    201303,
+                                                    202604
+                                                ],
+                                                "R": 4
+                                            },
+                                            {
+                                                "C": [
+                                                    14,
+                                                    14,
+                                                    201307
+                                                ],
+                                                "R": 20
+                                            },
+                                            {
+                                                "C": [
+                                                    15,
+                                                    15,
+                                                    201601,
+                                                    202009
+                                                ],
+                                                "R": 4
+                                            },
+                                            {
+                                                "C": [
+                                                    16,
+                                                    16,
+                                                    202412
+                                                ],
+                                                "R": 12
+                                            },
+                                            {
+                                                "C": [
+                                                    17,
+                                                    17,
+                                                    201412,
+                                                    202604
+                                                ],
+                                                "R": 4
+                                            },
+                                            {
+                                                "C": [
+                                                    18,
+                                                    18,
+                                                    201601
+                                                ],
+                                                "R": 20
+                                            },
+                                            {
+                                                "C": [
+                                                    19,
+                                                    19,
+                                                    201512
+                                                ],
+                                                "R": 20
+                                            },
+                                            {
+                                                "C": [
+                                                    20,
+                                                    20,
+                                                    201609,
+                                                    201909
+                                                ],
+                                                "R": 4
+                                            },
+                                            {
+                                                "C": [
+                                                    21,
+                                                    21,
+                                                    201711,
+                                                    202604
+                                                ],
+                                                "R": 4
+                                            },
+                                            {
+                                                "C": [
+                                                    22,
+                                                    22,
+                                                    202001
+                                                ],
+                                                "R": 20
+                                            },
+                                            {
+                                                "C": [
+                                                    23,
+                                                    23,
+                                                    201809
+                                                ],
+                                                "R": 20
+                                            },
+                                            {
+                                                "C": [
+                                                    24,
+                                                    24,
+                                                    201907
+                                                ],
+                                                "R": 20
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "IC": true,
+                                "HAD": true,
+                                "ValueDicts": {
+                                    "D0": [
+                                        "068003",
+                                        "068004",
+                                        "068006",
+                                        "068009",
+                                        "068011",
+                                        "068012",
+                                        "068013",
+                                        "068018",
+                                        "068019",
+                                        "068022",
+                                        "068026",
+                                        "068028",
+                                        "068029",
+                                        "068032",
+                                        "068033",
+                                        "068036",
+                                        "068039",
+                                        "068041",
+                                        "068052",
+                                        "068064",
+                                        "068066",
+                                        "068069",
+                                        "068070",
+                                        "068071",
+                                        "068072"
+                                    ],
+                                    "D1": [
+                                        "Financiera Ayudamos",
+                                        "Start Banregio",
+                                        "Banregio Soluciones Financieras",
+                                        "Sociedad Financiera Inbursa",
+                                        "Tarjetas Banamex",
+                                        "Globalcard",
+                                        "Financiera Bajío",
+                                        "Santander Consumo",
+                                        "Banorte-Ixe Tarjetas",
+                                        "Servicios Financieros Soriana",
+                                        "Santander Hipotecario",
+                                        "Sofom Inbursa",
+                                        "Finanmadrid",
+                                        "Arrendadora BX+",
+                                        "Arrendadora Afirme",
+                                        "Santander Vivienda",
+                                        "SabCapital",
+                                        "Metrofinanciera",
+                                        "Autoexpress",
+                                        "STM Financial",
+                                        "Motus",
+                                        "Santander Inclusión Financiera",
+                                        "Arrendadora Bancrea",
+                                        "Arrendadora Base",
+                                        "Invex Consumo"
+                                    ],
+                                    "D2": [
+                                        "Consolidan con Bancos"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

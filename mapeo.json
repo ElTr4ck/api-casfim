@@ -1,0 +1,128 @@
+[
+  {
+    "clave_casfim": "068003",
+    "nombre": "Financiera Ayudamos",
+    "grupo": "Consolidan con Bancos",
+    "consolida_con": "#"
+  },
+  {
+    "clave_casfim": "068004",
+    "nombre": "Start Banregio",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068006",
+    "nombre": "Banregio Soluciones Financieras",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068009",
+    "nombre": "Sociedad Financiera Inbursa",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068011",
+    "nombre": "Tarjetas Banamex",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068012",
+    "nombre": "Globalcard",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068013",
+    "nombre": "Financiera Bajío",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068018",
+    "nombre": "Santander Consumo",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068019",
+    "nombre": "Banorte-Ixe Tarjetas",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068022",
+    "nombre": "Servicios Financieros Soriana",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068026",
+    "nombre": "Santander Hipotecario",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068028",
+    "nombre": "Sofom Inbursa",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068029",
+    "nombre": "Finanmadrid",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068032",
+    "nombre": "Arrendadora BX+",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068033",
+    "nombre": "Arrendadora Afirme",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068036",
+    "nombre": "Santander Vivienda",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068039",
+    "nombre": "SabCapital",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068041",
+    "nombre": "Metrofinanciera",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068052",
+    "nombre": "Autoexpress",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068064",
+    "nombre": "STM Financial",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068066",
+    "nombre": "Motus",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068069",
+    "nombre": "Santander Inclusión Financiera",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068070",
+    "nombre": "Arrendadora Bancrea",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068071",
+    "nombre": "Arrendadora Base",
+    "grupo": "Consolidan con Bancos"
+  },
+  {
+    "clave_casfim": "068072",
+    "nombre": "Invex Consumo",
+    "grupo": "Consolidan con Bancos"
+  }
+]
