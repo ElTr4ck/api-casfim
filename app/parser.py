@@ -33,6 +33,9 @@ _FOOTER_RE = re.compile(r"^\d+\s+de\s+\d+$")
 # Título de sector: "Sector 40: Instituciones de Banca Múltiple".
 _TITULO_RE = re.compile(r"Sector\s+(\d+)\s*:\s*(.+)", re.IGNORECASE)
 
+# Fecha en los metadatos del PDF: "D:20260810105239-06'00'" (formato PDF/ISO 8601).
+_PDF_DATE_RE = re.compile(r"^D:(\d{4})(\d{2})(\d{2})")
+
 
 # Margen (puntos) a la izquierda del encabezado "Nombre" para separar la Razón
 # Social (ancha y desalineada) de la columna Nombre Corto.
@@ -50,7 +53,7 @@ class _Boundaries:
 
     La columna Clave NO se delimita por X: la clave es siempre la primera palabra
     de la línea-ancla. Todo lo que quede a la izquierda de ``razon_nombre`` se
-    considera Razón Social y se ignora (no se pide en la API).
+    considera Razón Social (nombre largo).
     """
 
     razon_nombre: float
@@ -122,12 +125,31 @@ def _clean(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def parse_sector_pdf(pdf_bytes: bytes) -> tuple[int | None, str | None, list[dict]]:
+def _fecha_actualizacion_pdf(metadata: dict) -> str | None:
+    """Fecha ('dd/mm/aaaa') en que SHCP generó/actualizó el PDF del sector.
+
+    Se toma de los metadatos del archivo (ModDate, o CreationDate si falta),
+    que Excel escribe cada vez que se re-exporta el catálogo.
+    """
+    raw = metadata.get("ModDate") or metadata.get("CreationDate")
+    if not raw:
+        return None
+    m = _PDF_DATE_RE.match(raw)
+    if not m:
+        return None
+    anio, mes, dia = m.groups()
+    return f"{dia}/{mes}/{anio}"
+
+
+def parse_sector_pdf(
+    pdf_bytes: bytes,
+) -> tuple[int | None, str | None, str | None, list[dict]]:
     """Parsea el PDF de un sector.
 
-    Devuelve ``(numero_sector, nombre_sector, registros)`` donde cada registro es
-    un dict con: ``clave_casfim``, ``nombre_corto``, ``estatus``,
-    ``fecha_actualizacion``.
+    Devuelve ``(numero_sector, nombre_sector, actualizado_al, registros)`` donde
+    ``actualizado_al`` es la fecha en que SHCP generó ese PDF (metadatos del
+    archivo) y cada registro es un dict con: ``clave_casfim``, ``nombre_largo``,
+    ``nombre_corto``, ``estatus``, ``fecha_actualizacion``.
     """
     sector_num: int | None = None
     sector_nombre: str | None = None
@@ -135,6 +157,7 @@ def parse_sector_pdf(pdf_bytes: bytes) -> tuple[int | None, str | None, list[dic
     boundaries: _Boundaries | None = None
 
     with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
+        actualizado_al = _fecha_actualizacion_pdf(pdf.metadata)
         for page in pdf.pages:
             words = page.extract_words()
             if not words:
@@ -180,12 +203,18 @@ def parse_sector_pdf(pdf_bytes: bytes) -> tuple[int | None, str | None, list[dic
                     continue
 
                 cols: dict[str, list[str]] = {
+                    "razon": [],
                     "nombre": [],
                     "estatus": [],
                     "fecha": [],
                 }
                 for t in sorted(assigned[a]):
-                    for w in lines[t]:
+                    # La Clave es la primera palabra de la línea-ancla y no forma
+                    # parte de la Razón Social; se descarta al recolectar "razon".
+                    line_words = lines[t]
+                    if t == a:
+                        line_words = line_words[1:]
+                    for w in line_words:
                         c = boundaries.column_of(w["x0"])
                         if c in cols:
                             cols[c].append(w["text"])
@@ -194,10 +223,11 @@ def parse_sector_pdf(pdf_bytes: bytes) -> tuple[int | None, str | None, list[dic
                     {
                         # Clave sin el guion separador: "40-012" -> "40012".
                         "clave_casfim": clave.replace("-", ""),
+                        "nombre_largo": _clean(" ".join(cols["razon"])),
                         "nombre_corto": _clean(" ".join(cols["nombre"])),
                         "estatus": _clean(" ".join(cols["estatus"])),
                         "fecha_actualizacion": _clean(" ".join(cols["fecha"])) or None,
                     }
                 )
 
-    return sector_num, sector_nombre, registros
+    return sector_num, sector_nombre, actualizado_al, registros

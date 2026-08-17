@@ -52,11 +52,12 @@ def health():
     "/instituciones/en-operacion",
     response_model=list[InstitucionEnOperacion],
     tags=["instituciones"],
-    summary="Instituciones 'En Operación' (clave + nombre corto)",
+    summary="Instituciones 'En Operación' (clave + nombre largo + nombre corto)",
 )
 def instituciones_en_operacion():
-    """Devuelve, en un solo JSON y para los tres sectores, la **clave CASFIM** y
-    el **nombre corto** de todas las instituciones cuyo estatus es *En Operación*.
+    """Devuelve, en un solo JSON y para los tres sectores, la **clave CASFIM**, el
+    **nombre largo** (razón social) y el **nombre corto** de todas las
+    instituciones cuyo estatus es *En Operación*.
     """
     try:
         return service.en_operacion()

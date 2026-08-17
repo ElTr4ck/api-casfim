@@ -9,6 +9,9 @@ class Institucion(BaseModel):
     """Registro completo de una institución tal como aparece en el catálogo."""
 
     clave_casfim: str = Field(..., examples=["40002"], description="Clave CASFIM (sin guion).")
+    nombre_largo: str = Field(
+        ..., examples=["BANCO NACIONAL DE MÉXICO, S.A."], description="Razón social."
+    )
     nombre_corto: str = Field(..., examples=["BANAMEX"], description="Nombre corto.")
     estatus: str = Field(..., examples=["En Operación"], description="Estatus actual.")
     fecha_actualizacion: str | None = Field(
@@ -18,13 +21,20 @@ class Institucion(BaseModel):
     sector_nombre: str = Field(
         ..., examples=["Instituciones de Banca Múltiple"], description="Nombre del sector."
     )
+    sector_actualizado_al: str | None = Field(
+        None,
+        examples=["10/08/2026"],
+        description="Fecha en que SHCP generó el PDF de este sector (dd/mm/aaaa).",
+    )
 
 
 class InstitucionEnOperacion(BaseModel):
-    """Vista reducida para el endpoint principal (sólo clave y nombre corto)."""
+    """Vista reducida para el endpoint principal (clave, nombre largo y nombre corto)."""
 
     clave_casfim: str = Field(..., examples=["40002"])
+    nombre_largo: str = Field(..., examples=["BANCO NACIONAL DE MÉXICO, S.A."])
     nombre_corto: str = Field(..., examples=["BANAMEX"])
+    sector_actualizado_al: str | None = Field(None, examples=["10/08/2026"])
 
 
 class SectorInfo(BaseModel):
@@ -34,6 +44,11 @@ class SectorInfo(BaseModel):
     nombre: str
     pdf_url: str | None = None
     total_instituciones: int | None = None
+    actualizado_al: str | None = Field(
+        None,
+        examples=["10/08/2026"],
+        description="Fecha en que SHCP generó el PDF de este sector (dd/mm/aaaa).",
+    )
 
 
 class HealthResponse(BaseModel):

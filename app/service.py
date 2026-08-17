@@ -24,6 +24,7 @@ class CatalogoService:
         self._lock = threading.Lock()
         self._instituciones: list[dict] = []
         self._pdf_urls: dict[int, str] = {}
+        self._actualizado_al: dict[int, str] = {}
         self._errores: dict[int, str] = {}
         self._loaded_at: float | None = None
 
@@ -59,6 +60,7 @@ class CatalogoService:
     def _recargar(self) -> None:
         urls = scraper.descubrir_urls()
         instituciones: list[dict] = []
+        actualizado_al: dict[int, str] = {}
         errores: dict[int, str] = {}
 
         for sector in sorted(config.SECTORES):
@@ -68,15 +70,18 @@ class CatalogoService:
                 continue
             try:
                 pdf_bytes = scraper.descargar_pdf(url)
-                num, nombre, registros = parse_sector_pdf(pdf_bytes)
+                num, nombre, fecha_pdf, registros = parse_sector_pdf(pdf_bytes)
                 num = num or sector
                 nombre = nombre or config.SECTORES[sector]
+                if fecha_pdf:
+                    actualizado_al[num] = fecha_pdf
                 for r in registros:
                     instituciones.append(
                         {
                             **r,
                             "sector": num,
                             "sector_nombre": nombre,
+                            "sector_actualizado_al": fecha_pdf,
                         }
                     )
             except Exception as exc:  # noqa: BLE001 - se reporta al cliente
@@ -84,6 +89,7 @@ class CatalogoService:
 
         self._instituciones = instituciones
         self._pdf_urls = urls
+        self._actualizado_al = actualizado_al
         self._errores = errores
         self._loaded_at = time.time()
 
@@ -99,10 +105,15 @@ class CatalogoService:
         return data
 
     def en_operacion(self) -> list[dict]:
-        """Sólo instituciones 'En Operación', vista reducida (clave + nombre)."""
+        """Sólo instituciones 'En Operación', vista reducida (clave + nombres)."""
         objetivo = _normaliza(config.ESTATUS_EN_OPERACION)
         return [
-            {"clave_casfim": i["clave_casfim"], "nombre_corto": i["nombre_corto"]}
+            {
+                "clave_casfim": i["clave_casfim"],
+                "nombre_largo": i["nombre_largo"],
+                "nombre_corto": i["nombre_corto"],
+                "sector_actualizado_al": i["sector_actualizado_al"],
+            }
             for i in self.todas()
             if _normaliza(i["estatus"]) == objetivo
         ]
@@ -132,6 +143,7 @@ class CatalogoService:
                     "nombre": nombre,
                     "pdf_url": self._pdf_urls.get(sector),
                     "total_instituciones": total,
+                    "actualizado_al": self._actualizado_al.get(sector),
                     "error": self._errores.get(sector),
                 }
             )

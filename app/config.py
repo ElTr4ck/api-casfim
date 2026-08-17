@@ -19,7 +19,7 @@ SECTORES: dict[int, str] = {
 # sector, por lo que el scraper, cuando funciona, sólo necesita leer estos enlaces.
 FALLBACK_PDF_URLS: dict[int, str] = {
     37: "https://www.gob.mx/cms/uploads/attachment/file/839073/sector37.pdf",
-    40: "https://www.gob.mx/cms/uploads/attachment/file/1065660/sector40.pdf",
+    40: "https://www.gob.mx/cms/uploads/attachment/file/1097072/sector40.pdf",
     68: "https://www.gob.mx/cms/uploads/attachment/file/1076836/sector68.pdf",
 }
 
